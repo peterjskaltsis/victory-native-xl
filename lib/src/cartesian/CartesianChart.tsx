@@ -274,6 +274,15 @@ export function CartesianChart<
         touchMap.value[touch.id] = undefined;
       }
     })
+    .onEnd(() => {
+      const vals = activePressSharedValues || [];
+      // Set active state to false for all vals
+      for (const val of vals) {
+        if (val) {
+          val.isActive.value = false;
+        }
+      }
+    })
     /**
      * Activate after a long press, which helps with preventing all touch hijacking.
      * This is important if this chart is inside of some sort of scrollable container.
